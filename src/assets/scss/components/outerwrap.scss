@@ -1,0 +1,20 @@
+$module: 		'outerwrap';
+
+.#{$module} {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	opacity: random(255);
+	background-color: $color3;
+	flex-flow: column wrap;
+	color: white;
+
+	&--admin {
+		@extend .#{$module};
+		min-height: 100vh;
+		height: auto;
+		text-align: left;
+	}
+}

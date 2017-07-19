@@ -1,0 +1,10 @@
+$module: 		'btn';
+
+.#{$module} {
+	&--primary {
+		@extend %btn;
+		background-color: darken($color3,10%);
+		padding: em(5) em(10);
+		color: white;
+	}
+}

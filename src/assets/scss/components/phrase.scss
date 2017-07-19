@@ -1,0 +1,31 @@
+$module: 		'phrase';
+
+
+.#{$module} {
+	$fz: 32;
+	font-size: em($fz);
+	opacity: 0;
+	transition: opacity 0.15s linear;
+	width: 100%;
+	color: white;
+	max-width: em(700,$fz);
+	margin: 0 auto em(30,$fz);
+
+	&.active {
+		opacity: 1;
+	}
+
+	&__desc {
+		font-style: italic;
+		color: white;
+		transition: opacity 0.25s 0.75s linear;
+		opacity: 0;
+		text-align: right;
+		width: em(700);
+		margin: 0 auto;
+
+		&.active {
+			opacity: 1;
+		}
+	}
+}

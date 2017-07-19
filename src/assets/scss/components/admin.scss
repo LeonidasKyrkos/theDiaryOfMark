@@ -1,0 +1,12 @@
+$module: 		'admin';
+
+.#{$module} {
+	&__list {
+		background-color: darken($color3,10%);
+		padding: em(10);
+	}
+
+	&__list-item {
+		margin-bottom:  em(10);
+	}
+}
