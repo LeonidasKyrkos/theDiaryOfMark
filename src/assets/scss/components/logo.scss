@@ -1,0 +1,30 @@
+.logo {	
+	width: 100%;
+	height: auto;	
+
+	&__wrap {
+		position: absolute;
+		top: em(10);
+		left: em(10);
+		width: em(200);
+		max-width: 100%;
+
+		&:after {
+			$fz: 28;
+			font-size: em($fz);
+			content: "The Sherm";
+			position: absolute;
+			bottom: em(10);
+			left: 0;
+			right: 0;
+			text-align: center;
+			text-shadow: 2px 2px 0 black;
+		}
+
+		@media(max-width: 800px) {
+			@media(max-height: 800px) {
+				display: none;
+			}
+		}		
+	}
+}
