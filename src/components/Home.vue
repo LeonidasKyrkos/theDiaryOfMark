@@ -18,7 +18,8 @@ export default {
 			phrases: [],
 			phrase: {
 				value: '',
-				desc: ''
+				desc: '',
+				gif: ''
 			},
 			easterEggArr: [],
 			easterEggTarget: 'sherm'.split(''),
@@ -55,7 +56,9 @@ export default {
 		onKeydown(e) {
 			(e.which === 37 || e.which === 39) && this.updatePhrase();
 
-			this.easterEgg(e.key);
+			if(!this.logoActive) {
+				this.easterEgg(e.key);
+			}
 		},
 		easterEgg(key) {
 			if(key === this.easterEggTarget[this.easterEggArr.length]) {
