@@ -1,11 +1,11 @@
 $module: 		'form';
 
 .#{$module} {
-	max-width: em(700);
 	text-align: left;
-	margin: 0 auto;
-	padding: em(20);
+	margin: 0 auto em(30);
 	width: 100%;
+	background-color: rgba(black,0.1);
+	padding: em(20);
 
 	&__control {
 		display: block;

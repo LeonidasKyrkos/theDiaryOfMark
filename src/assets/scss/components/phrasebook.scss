@@ -1,0 +1,36 @@
+$module: 		'phrasebook';
+
+.#{$module} {
+	&__item {
+		display: flex;
+		align-items: center;
+		margin-bottom: em(20);
+		background-color: rgba(black,0.1);
+		padding: em(10);
+	}
+
+	&__values {
+		padding-right: em(20);
+	}
+
+	&__value {
+		$fz: 14;
+		display: block;
+		font-size: em($fz);
+		margin-bottom: em(10,$fz);
+	}
+
+	&__desc {
+		@extend .#{$module}__value;
+		margin-bottom: 0;
+		font-style: italic;
+	}
+
+	&__image {
+		max-width: em(150);
+		max-height: em(150);
+		height: auto;
+		width: auto;
+		margin-left: auto;
+	}
+}

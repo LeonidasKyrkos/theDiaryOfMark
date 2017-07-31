@@ -12,6 +12,7 @@ $module: 		'phrase';
 	padding-bottom: em(10,$fz);
 	border-bottom: em(2,$fz) solid rgba(white,0.3);
 	margin: 0 auto em(10,$fz);
+	display: block;
 
 	&:before {
 		content: "“";
@@ -38,12 +39,20 @@ $module: 		'phrase';
 		opacity: 0;
 		text-align: right;
 		width: em(700);
-		margin: 0 auto;
+		margin: 0 auto em(30);
 		max-width: 100%;
 		padding: 0 em(10);
+		display: block;
 
 		&.active {
 			opacity: 1;
 		}
+	}
+
+	&__gif {
+		display: block;
+		max-width: em(300);
+		max-height: em(300);
+		margin: 0 auto em(30);
 	}
 }
