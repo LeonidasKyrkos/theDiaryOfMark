@@ -26,8 +26,8 @@
 				<li class="phrasebook__item" v-for="(phrase, index) in phrases" v-bind:key="index">
 					<form class="phrasebook__values">
 						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.value" v-model="phrases[index].value">
-						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.desc" v-model="phrases[index].desc">
-						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.gif" v-model="phrases[index].gif">
+						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.desc" v-model="phrases[index].desc" placeholder="Enter a description">
+						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.gif" v-model="phrases[index].gif" placeholder="Enter a gif URL">
 					</form>
 					<img class="phrasebook__image" v-bind:src="phrase.gif" alt="">
 				</li>
