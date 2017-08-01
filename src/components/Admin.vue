@@ -30,8 +30,12 @@
 						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.gif" v-model="phrases[index].gif" placeholder="Enter a gif URL">
 					</form>
 					<img class="phrasebook__image" v-bind:src="phrase.gif" alt="">
+					<div class="phrasebook__link-wrap">
+						<button @click="copyLink" class="btn--primary phrasebook__copy" v-bind:data-value="`thediaryofmark.co.uk/#/phrases/${phrase['.key']}`">Copy link</button>	
+					</div>
 				</li>
 			</ul>
+			<input ref="hiddenLink" type="text" class="invisible">
 		</div>
 	</div>
 </template>
@@ -72,6 +76,11 @@ export default {
 			delete phrase['.key'];
 
 			this.$firebaseRefs.phrases.child(original['.key']).set(phrase)
+		},
+		copyLink(e) {
+			this.$refs.hiddenLink.value = e.target.dataset.value;
+			this.$refs.hiddenLink.select();
+			document.execCommand('copy');
 		}
 	}
 }

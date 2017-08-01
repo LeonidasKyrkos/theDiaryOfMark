@@ -7,6 +7,7 @@ $module: 		'phrasebook';
 		margin-bottom: em(20);
 		background-color: rgba(black,0.1);
 		padding: em(10);
+		flex-flow: row wrap;
 	}
 
 	&__values {
@@ -40,5 +41,15 @@ $module: 		'phrasebook';
 		height: auto;
 		width: auto;
 		margin-left: auto;
+	}
+
+	&__link-wrap {
+		width: 100%;
+		padding: em(5) 0;
+	}
+
+	&__hiddenlink {
+		visibility: hidden;
+		position: absolute;
 	}
 }
