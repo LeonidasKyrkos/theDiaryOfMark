@@ -21,6 +21,7 @@ export default {
 	data() {
 		return {
 			phrases: [],
+			srcPhrases: [],
 			phrase: {
 				value: '',
 				desc: '',
@@ -32,9 +33,10 @@ export default {
 		}
 	},
 	firebase: {
-		phrases: {
+		srcPhrases: {
 			source: db.ref('phrases/'),
 			readyCallback(e) {
+				this.resetPhrases();
 				this.updatePhrase();
 			}
 		}
@@ -49,9 +51,13 @@ export default {
 
 			if(index) {
 				this.phrase = this.phrases[index];
+				this.phrases.splice(index, 1);
 			} else {
 				this.goToRandomPhrase();
 			}
+		},
+		resetPhrases() {
+			this.phrases = [ ...this.srcPhrases ];
 		},
 		goToPhrase(phrase) {
 			if(phrase) {
@@ -61,6 +67,7 @@ export default {
 			}
 		},
 		goToRandomPhrase() {
+			this.phrases.length <= 1 && this.resetPhrases();
 			this.random = this.getRandomNumber();
 
 			if(this.phrases[this.random]) {
