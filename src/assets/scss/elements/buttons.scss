@@ -7,4 +7,12 @@ $module: 		'btn';
 		padding: em(5) em(10);
 		color: white;
 	}
+
+	&--secondary {
+		@extend %btn;
+		background-color: #005353;
+		padding: em(10) em(20);
+		color: white;
+		outline: 0;
+	}
 }

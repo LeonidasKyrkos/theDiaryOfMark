@@ -19,15 +19,16 @@
 						<input class="form__input" placeholder="The URL of a gif which describes the situation..." name="gif" v-model="phrase.gif" type="text">
 					</div>
 				</label>
-				<button v-on:click="addItem()" type="button" class="btn--primary">Submit</button>
+				<button @click="addItem()" type="button" class="btn--primary">Submit</button>
 			</form>
 			<h2 class="beta">Existing phrases:</h2>
 			<ul class="phrasebook">
-				<li class="phrasebook__item" v-for="(phrase, index) in phrases" v-bind:key="phrase.index">
-					<div class="phrasebook__values">
-						<span class="phrasebook__value">{{ phrase.value }}</span>
-						<span class="phrasebook__desc">{{ phrase.desc }}</span>
-					</div>					
+				<li class="phrasebook__item" v-for="(phrase, index) in phrases" v-bind:key="index">
+					<form class="phrasebook__values">
+						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.value" v-model="phrases[index].value">
+						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.desc" v-model="phrases[index].desc">
+						<input @input="updatePhrase(index)" type="text" class="phrasebook__value" v-bind:value="phrase.gif" v-model="phrases[index].gif">
+					</form>
 					<img class="phrasebook__image" v-bind:src="phrase.gif" alt="">
 				</li>
 			</ul>
@@ -64,6 +65,13 @@ export default {
 		addItem() {
 			db.ref('phrases/').push(this.phrase);
 			this.phrase = this.defaultPhrase;
+		},
+		updatePhrase: function (index) {
+			let original = this.phrases[index];
+			let phrase = { ...original };
+			delete phrase['.key'];
+
+			this.$firebaseRefs.phrases.child(original['.key']).set(phrase)
 		}
 	}
 }

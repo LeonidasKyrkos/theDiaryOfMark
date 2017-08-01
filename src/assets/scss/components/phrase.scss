@@ -55,4 +55,10 @@ $module: 		'phrase';
 		max-height: em(300);
 		margin: 0 auto em(30);
 	}
+
+	&__next {
+		position: absolute;
+		top: em(10);
+		right: em(10);
+	}
 }

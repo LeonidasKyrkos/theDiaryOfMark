@@ -6,19 +6,20 @@
 		<div class="phrase__wrap">
 			<span class="phrase" v-bind:class="{ active: phrase.value.length }">{{phrase.value}}</span>
 			<span class="phrase__desc" v-bind:class="{ active: phrase.desc.length }">{{phrase.desc}}</span>
-			<img v-bind:src="phrase.gif" class="phrase__gif" alt="">
-		</div>		
+			<img v-if="phrase.gif" v-bind:src="phrase.gif" class="phrase__gif" alt="">
+		</div>
+		<button class="btn--secondary phrase__next" v-on:click="goToRandomPhrase()">Random</button>
 	</div>
 </template>
 
 <script>
 import db from '../firebase';
+import router from "../router";
 
 export default {
 	name: 'Home',
 	data() {
 		return {
-			phrasesObj: {},
 			phrases: [],
 			phrase: {
 				value: '',
@@ -27,42 +28,50 @@ export default {
 			},
 			easterEggArr: [],
 			easterEggTarget: 'sherm'.split(''),
-			logoActive: false,
-			requestedPhrase: this.$route.params.phrase || ''
+			logoActive: false
 		}
 	},
 	firebase: {
-		phrasesObj: {
+		phrases: {
 			source: db.ref('phrases/'),
-			asObject: true,
 			readyCallback(e) {
-				for(const prop in this.phrasesObj) {
-					this.phrases.push(this.phrasesObj[prop]);
-				}
-
 				this.updatePhrase();
 			}
 		}
 	},
 	created() {
 		window.addEventListener('keydown',this.onKeydown.bind(this));
+		window.addEventListener('hashchange',this.updatePhrase.bind(this));
 	},
 	methods: {
 		updatePhrase() {
-			if(this.requestedPhrase) {
-				this.phrase = this.phrasesObj[this.requestedPhrase];
-			} else {
-				let random = this.getRandom();
+			const index = this.$route.params.phrase ? this.phrases.findIndex(el => el['.key'] === this.$route.params.phrase) : null;
 
-				if(this.phrases[random]) {
-					this.phrase = this.phrases[random];
-					this.phrases.splice(random,1);
-				} else {
-					this.phrase = this.phrases[0];
-				}
+			if(index) {
+				this.phrase = this.phrases[index];
+			} else {
+				this.goToRandomPhrase();
 			}
 		},
-		getRandom() {
+		goToPhrase(phrase) {
+			if(phrase) {
+				router.push(`/phrases/${phrase}`);
+			} else {
+				this.goToRandomPhrase();
+			}
+		},
+		goToRandomPhrase() {
+			this.random = this.getRandomNumber();
+
+			if(this.phrases[this.random]) {
+				var phrase = this.phrases[this.random];
+			} else {
+				var phrase = this.phrases[0];
+			}
+
+			this.goToPhrase(phrase['.key']);
+		},
+		getRandomNumber() {
 			return Math.floor(Math.random() * this.phrases.length - 0.1);
 		},
 		onKeydown(e) {
@@ -82,6 +91,9 @@ export default {
 			if(this.easterEggArr.join('') === this.easterEggTarget.join('')) {
 				this.logoActive = true;
 			}
+		},
+		next() {
+			this.getRandomPhrase();
 		}
 	}
 }
